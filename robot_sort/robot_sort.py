@@ -96,8 +96,79 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        # all this just to sort a list?
+        # the light acts as a true/false statement
+        # compare item will act as greater/less/equal to statements
+
+        #copy bubble sort?
+        #self.move_right()
+        print(self.swap_item())
+
+        #track swaps with the robot light- on
+        self.set_light_on()
+        #create a while loop that is broken by the light being off
+        while self.light_is_on():
+            #turn light off so it can stop when there are no swaps
+            self.set_light_off()
+
+            #I need to move it back to the front when it finishes a loop
+            #somehow, I need to put the largest value down as I get to the end
+            #but when I do that I end up in an endless loop
+            #how can I do it in a way that doesn't end up with the two largest values
+            #just constantly switching back and forth?
+            if self.can_move_right() != True:
+                print('moved left')
+                #move back one so I can compare the last number to held number
+                self.move_left()
+                print('the info you want:', self._item, self._list[self._position])
+                #while the number in front is greater than the number held
+                #move back
+                while self.compare_item() == -1:
+                    print('did it make it to the first compare statement')
+                    self.move_left()
+                #if the held item is greater than the one in front, swap???????
+                #why does this make an endless loop?
+                if self.compare_item() == 1:
+                    self.swap_item()
+                    print('moved swap to reseting pointer statement:', self._item, self._list[self._position])
+                    self.move_left()
+                    self.swap_item()
+                    print('moved swap to reseting pointer statement:', self._item, self._list[self._position])
+
+                #self.swap_item()
+                while self.can_move_left():
+                    self.move_left()
+                
+
+
+            #for i in list
+            while self.can_move_right():
+                self.move_right()
+
+                print('item:', self._item)
+                print('next item:', self._list[self._position])
+
+                #I need to put down the last value when I get to the end somehow
+                if self.compare_item() == None:
+                    print('swaped none')
+                    print('None item and next item:', self._item, self._list[self._position])
+                    self.move_left()
+                    self.swap_item()
+
+                #compare current item to next item
+                if self.compare_item() == -1:
+                #if current item is larger than next item, swap
+                    print('compare', self.compare_item())
+                    print('did it swap')
+                    print('item in position vs next item (inside):', self._item, self._list[self._position])
+                    self.swap_item()
+
+                    #turn light on because of the swap
+                    self.set_light_on()
+
+        #return the list
+        return self
+
 
 
 if __name__ == "__main__":
